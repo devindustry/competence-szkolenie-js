@@ -7,41 +7,38 @@
 
 
     <script type="text/javascript">
-      var Person = {
-        name: '',
-        surname: '',
-        pesel: '',
-
-        setData: function(name, surname, pesel) {
-          this.name = name;
-          this.surname = surname;
-          this.pesel = pesel;
-        },
-
-        displayData: function() {
-          console.log(`Imie: ${this.name}, Nazwisko: ${this.surname}, Pesel: ${this.pesel}`);
-        }
+      function Person(name, surname, pesel, )  {
+        this.name = name;
+        this.surname = surname;
+        this.pesel = pesel;
       }
 
-      var students = [];
+      Person.prototype.displayData = function() {
+        console.log(`Imie: ${this.name}, Nazwisko: ${this.surname}, Pesel: ${this.pesel}`);
+      }
 
-      var student1 = Object.create(Person);
-      student1.setData('Kaj', 'Bialas', '111222333');
-      students.push(student1);
+      function Student(name, surname, pesel) {
+        Person.call(this, name, surname, pesel);
+        this.role = 'student';
+      }
 
-      var student2 = Object.create(Person);
-      student2.setData('Karol', 'Kowalski', '111222333');
-      students.push(student2);
+      Student.prototype = Object.create(Person.prototype);
+      Student.prototype.constructor = Student;
+
+      function Teacher(name, surname, pesel) {
+        Person.call(this, name, surname, pesel);
+        this.role = 'teacher';
+      }
+
+      Teacher.prototype = Object.create(Person.prototype);
+      Teacher.prototype.constructor = Teacher;
+
+      var students = [new Student('Kaj', 'Bialas', '111222333'), new Student('Adam', 'Kowalski', '2111222333')];
+      var teachers = [new Student('Karol', 'Bialas', '111222333'), new Student('Maciej', 'Kowalski', '2111222333')]
 
       students.forEach((element) => element.displayData());
+      teachers.forEach((element) => element.displayData());
 
-      // students.forEach(function (element){
-      //   element.displayData();
-      // });
-
-      // students.map(function(element){
-      //   element.displayData();
-      // });
     </script>
     </body>
 </html>
