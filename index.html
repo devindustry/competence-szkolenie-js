@@ -7,29 +7,41 @@
 
 
     <script type="text/javascript">
-      const SELECTED_PARAM = 10;
-      const DOM_FIBO_ELEMENT = 'fibo-result';
-      const DOM_SILNIA_ELEMENT = 'silnia-result';
+      var Person = {
+        name: '',
+        surname: '',
+        pesel: '',
 
-      function calculateFibo(n) {
-        if (n === 0) return 0;
-        if (n === 1) return 1;
-        return calculateFibo(n-1)+calculateFibo(n-2);
+        setData: function(name, surname, pesel) {
+          this.name = name;
+          this.surname = surname;
+          this.pesel = pesel;
+        },
+
+        displayData: function() {
+          console.log(`Imie: ${this.name}, Nazwisko: ${this.surname}, Pesel: ${this.pesel}`);
+        }
       }
 
-      function calculateSilnia(n) {
-        if (n > 1)
-          return n * calculateSilnia(n-1);
-        else
-          return 1;
-      }
+      var students = [];
 
-      function insertToHTML(element, value) {
-        document.getElementById(element).innerHTML = value;
-      }
+      var student1 = Object.create(Person);
+      student1.setData('Kaj', 'Bialas', '111222333');
+      students.push(student1);
 
-      insertToHTML(DOM_FIBO_ELEMENT, calculateFibo(SELECTED_PARAM));
-      insertToHTML(DOM_SILNIA_ELEMENT, calculateSilnia(SELECTED_PARAM));
+      var student2 = Object.create(Person);
+      student2.setData('Karol', 'Kowalski', '111222333');
+      students.push(student2);
+
+      students.forEach((element) => element.displayData());
+
+      // students.forEach(function (element){
+      //   element.displayData();
+      // });
+
+      // students.map(function(element){
+      //   element.displayData();
+      // });
     </script>
     </body>
 </html>
