@@ -7,38 +7,28 @@
 
 
     <script type="text/javascript">
-      function Person(name, surname, pesel, )  {
-        this.name = name;
-        this.surname = surname;
-        this.pesel = pesel;
+      // function Counter() {
+      //   var self = this;
+      //   self.count = 0;
+      //   setInterval(function() {
+      //     self.count += 1;
+      //     console.log(self.count);
+      //   }, 1000);
+      // }
+      // var counter = new Counter();
+
+
+      function Counter() {
+        this.count = 0;
+
+
+        setInterval(() => {
+          this.count += 1;
+          console.log(this.count);
+        }, 1000);
       }
 
-      Person.prototype.displayData = function() {
-        console.log(`Imie: ${this.name}, Nazwisko: ${this.surname}, Pesel: ${this.pesel}`);
-      }
-
-      function Student(name, surname, pesel) {
-        Person.call(this, name, surname, pesel);
-        this.role = 'student';
-      }
-
-      Student.prototype = Object.create(Person.prototype);
-      Student.prototype.constructor = Student;
-
-      function Teacher(name, surname, pesel) {
-        Person.call(this, name, surname, pesel);
-        this.role = 'teacher';
-      }
-
-      Teacher.prototype = Object.create(Person.prototype);
-      Teacher.prototype.constructor = Teacher;
-
-      var students = [new Student('Kaj', 'Bialas', '111222333'), new Student('Adam', 'Kowalski', '2111222333')];
-      var teachers = [new Student('Karol', 'Bialas', '111222333'), new Student('Maciej', 'Kowalski', '2111222333')]
-
-      students.forEach((element) => element.displayData());
-      teachers.forEach((element) => element.displayData());
-
+      var counter = new Counter();
     </script>
     </body>
 </html>
