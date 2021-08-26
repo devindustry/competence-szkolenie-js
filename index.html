@@ -1,0 +1,35 @@
+<html>
+    <head></head>
+    <body>
+
+    <div id="fibo-result"></div>
+    <div id="silnia-result"></div>
+
+
+    <script type="text/javascript">
+      const SELECTED_PARAM = 10;
+      const DOM_FIBO_ELEMENT = 'fibo-result';
+      const DOM_SILNIA_ELEMENT = 'silnia-result';
+
+      function calculateFibo(n) {
+        if (n === 0) return 0;
+        if (n === 1) return 1;
+        return calculateFibo(n-1)+calculateFibo(n-2);
+      }
+
+      function calculateSilnia(n) {
+        if (n > 1)
+          return n * calculateSilnia(n-1);
+        else
+          return 1;
+      }
+
+      function insertToHTML(element, value) {
+        document.getElementById(element).innerHTML = value;
+      }
+
+      insertToHTML(DOM_FIBO_ELEMENT, calculateFibo(SELECTED_PARAM));
+      insertToHTML(DOM_SILNIA_ELEMENT, calculateSilnia(SELECTED_PARAM));
+    </script>
+    </body>
+</html>
