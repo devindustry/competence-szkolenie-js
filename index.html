@@ -1,11 +1,31 @@
 <html>
     <head>
+        <style>
+            body {
+                height: 10000px;
+            }
+            .header {
+                background: blue;
+                transition: all 250ms linear;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+            .scroll {
+                background: red;
+                transition: all 250ms linear;
+            }
+        </style>
     </head>
     <body>
+    <header class="header">
+        Tytuł strony
+    </header>
     <div class="students">
     </div>
     <div id="teachers"></div>
-
+    <button class="disable">disable</button>
 
     <script type="text/javascript" src="js/script.js"></script>
     </body>

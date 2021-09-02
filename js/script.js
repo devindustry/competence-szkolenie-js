@@ -1,4 +1,6 @@
 const studentsDomElement = document.querySelector('.students');
+const headerDomElement = document.querySelector('.header');
+const buttonDomElement = document.querySelector('.disable');
 const teachersDomElement = document.querySelector('#teachers');
 
 class Person {
@@ -101,3 +103,18 @@ const renderHtml = (people) => people.map(element => {
 renderHtml(people);
 studentsDomElement.classList.add('final');
 teachersDomElement.classList.add('final');
+
+
+const scrollListener = () => {
+  if (window.scrollY > 300) {
+    headerDomElement.classList.add('scroll');
+  } else {
+    headerDomElement.classList.remove('scroll');
+  }
+}
+
+window.addEventListener('scroll', scrollListener);
+
+buttonDomElement.addEventListener('click', ()=> {
+  window.removeEventListener('scroll', scrollListener);
+});
