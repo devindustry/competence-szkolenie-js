@@ -7,56 +7,82 @@
 
 
     <script type="text/javascript">
-      class Person {
-        constructor(name, address, age) {
-          this.name = name;
-          this.address = address;
-          this.age = age;
-        }
+
+      function createCar(brand, model, age) {
+        const car = {};
+        car.brand = brand;
+        car.model = model;
+        car.age = age > 10 ? 'STARY' : 'NOWY';
+        return car;
       }
 
-      class Student extends Person {
-        constructor(name, address, age, id) {
-          super(name, address, age);
-          this.id = id;
-          this.profile = 'STUDENT';
-        }
-
-        displayFullInfo() {
-          console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
-        };
-
-        changeId(newId) {
-          this.id = newId;
-        }
-      }
-
-      class Teacher extends Person {
-        constructor(name, address, age, id) {
-          super(name, address, age);
-          this.id = id;
-          this.profile = 'TEACHER';
-        }
-
-        displayFullInfo() {
-          console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
-        };
-
-        changeId = (newId) => {
-          this.id = newId;
-        }
-      }
-
-      const people = [
-        new Student('Karol Kowalski', 'Poznań', 21, 1234523),
-        new Teacher('Kaj Bialas', 'Poznań', 30, 987654)
+      const carArray = [
+        createCar('VW', 'GOLF', 12),
+        createCar('VW', 'PASSAT', 10),
       ];
 
-      const [student1, teacher1] = people;
-      student1.displayFullInfo();
-      teacher1.displayFullInfo();
-      teacher1.changeId(4567);
-      teacher1.displayFullInfo();
+      console.log(carArray);
+
+
+
+      // class Person {
+      //   constructor(name, address, age) {
+      //     this.name = name;
+      //     this.address = address;
+      //     this.age = age;
+      //   }
+      //
+      //   changeAge(newAge) {
+      //     this.age = newAge;
+      //   }
+      // }
+      //
+      // class Student extends Person {
+      //   constructor(name, address, age, id) {
+      //     super(name, address, age);
+      //     this.id = id;
+      //     this.profile = 'STUDENT';
+      //   }
+      //
+      //   displayFullInfo() {
+      //     console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
+      //   };
+      //
+      //   changeId(newId) {
+      //     this.id = newId;
+      //   }
+      //
+      //   changeAge(newAge) {
+      //     this.age = `Nowy wiek: ${newAge}`;
+      //   }
+      // }
+      //
+      // class Teacher extends Person {
+      //   constructor(name, address, age, id) {
+      //     super(name, address, age);
+      //     this.id = id;
+      //     this.profile = 'TEACHER';
+      //   }
+      //
+      //   displayFullInfo() {
+      //     console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
+      //   };
+      //
+      //   changeId = (newId) => {
+      //     this.id = newId;
+      //   }
+      // }
+      //
+      // const people = [
+      //   new Student('Karol Kowalski', 'Poznań', 21, 1234523),
+      //   new Teacher('Kaj Bialas', 'Poznań', 30, 987654)
+      // ];
+      //
+      // const [student1, teacher1] = people;
+      // student1.displayFullInfo();
+      // teacher1.displayFullInfo();
+      // teacher1.changeId(4567);
+      // teacher1.displayFullInfo();
     </script>
     </body>
 </html>
