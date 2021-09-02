@@ -7,28 +7,56 @@
 
 
     <script type="text/javascript">
-      // function Counter() {
-      //   var self = this;
-      //   self.count = 0;
-      //   setInterval(function() {
-      //     self.count += 1;
-      //     console.log(self.count);
-      //   }, 1000);
-      // }
-      // var counter = new Counter();
-
-
-      function Counter() {
-        this.count = 0;
-
-
-        setInterval(() => {
-          this.count += 1;
-          console.log(this.count);
-        }, 1000);
+      class Person {
+        constructor(name, address, age) {
+          this.name = name;
+          this.address = address;
+          this.age = age;
+        }
       }
 
-      var counter = new Counter();
+      class Student extends Person {
+        constructor(name, address, age, id) {
+          super(name, address, age);
+          this.id = id;
+          this.profile = 'STUDENT';
+        }
+
+        displayFullInfo() {
+          console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
+        };
+
+        changeId(newId) {
+          this.id = newId;
+        }
+      }
+
+      class Teacher extends Person {
+        constructor(name, address, age, id) {
+          super(name, address, age);
+          this.id = id;
+          this.profile = 'TEACHER';
+        }
+
+        displayFullInfo() {
+          console.log(`${this.profile}: ${this.name}, ${this.address}, Wiek: ${this.age}, ID: ${this.id} `);
+        };
+
+        changeId = (newId) => {
+          this.id = newId;
+        }
+      }
+
+      const people = [
+        new Student('Karol Kowalski', 'Poznań', 21, 1234523),
+        new Teacher('Kaj Bialas', 'Poznań', 30, 987654)
+      ];
+
+      const [student1, teacher1] = people;
+      student1.displayFullInfo();
+      teacher1.displayFullInfo();
+      teacher1.changeId(4567);
+      teacher1.displayFullInfo();
     </script>
     </body>
 </html>
