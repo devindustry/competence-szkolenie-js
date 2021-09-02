@@ -89,10 +89,13 @@ const people = [
 ];
 
 const renderHtml = (people) => people.map(element => {
+  const newElement = document.createElement('div');
+  newElement.innerText = element.displayFullInfo();
+
   if (element.profile === PROFILE.STUDENT) {
-    return studentsDomElement.innerHTML += `<div>${element.displayFullInfo()}</div>`
+    return studentsDomElement.appendChild(newElement);
   }
-  return teachersDomElement.innerHTML += `<div>${element.displayFullInfo()}</div>`
+  return teachersDomElement.appendChild(newElement);
 });
 
 renderHtml(people);
