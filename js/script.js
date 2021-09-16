@@ -110,41 +110,71 @@ teachersDomElement.classList.add('final');
 
 
 const form = document.forms['peopleForm'];
+const formNameInput = form['name'];
+const formAddressInput = form['address'];
+const formAgeInput = form['age'];
+const formIdInput = form['id'];
+const formProfileInput = form['profile'];
+const formButton = form['submit'];
+formButton.disabled = true;
+
+const validation = {
+  name: false,
+  address: false,
+  profile: false,
+};
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const newPerson = {
-    name: form['name'].value,
-    address: form['address'].value,
-    age: form['age'].value,
-    id: form['id'].value,
-    profile: form['profile'].value === 'teacher' ? PROFILE.TEACHER : PROFILE.STUDENT,
-  }
-  people.push(new CreatePerson(newPerson));
-  renderHtml(people);
-  // window.location.assign(`${window.location.href.replace('index', 'index2')}?name=${form['name'].value}`);
-});
 
-form['name'].addEventListener('input', ()=> {
-  if (form['name'].value.length < 3) {
-    form['name'].classList.add('wrong');
-  } else {
-    form['name'].classList.remove('wrong');
+  if (validation.name && validation.address && validation.profile)  {
+    const newPerson = {
+      name: formNameInput.value,
+      address: formAddressInput.value,
+      age: formAgeInput.value,
+      id: formIdInput.value,
+      profile: formProfileInput.value === 'teacher' ? PROFILE.TEACHER : PROFILE.STUDENT,
+    }
+    people.push(new CreatePerson(newPerson));
+    renderHtml(people);
   }
 });
 
-form['address'].addEventListener('input', ()=> {
-  if (form['address'].value.length < 3) {
-    form['address'].classList.add('wrong');
+
+formNameInput.addEventListener('input', ()=> {
+  if (formNameInput.value.length < 3) {
+    formNameInput.classList.add('wrong');
+    validation.name = false;
   } else {
-    form['address'].classList.remove('wrong');
+    formNameInput.classList.remove('wrong');
+    validation.name = true;
   }
 });
 
-form['profile'].addEventListener('input', ()=> {
-  if (form['profile'].value === 'teacher' || form['profile'].value === 'student' ) {
-    form['profile'].classList.remove('wrong');
+formAddressInput.addEventListener('input', ()=> {
+  if (formAddressInput.value.length < 3) {
+    formAddressInput.classList.add('wrong');
+    validation.address = false;
   } else {
-    form['profile'].classList.add('wrong');
+    formAddressInput.classList.remove('wrong');
+    validation.address = true;
   }
 });
+
+formProfileInput.addEventListener('input', ()=> {
+  if (formProfileInput.value === 'teacher' || formProfileInput.value === 'student' ) {
+    formProfileInput.classList.remove('wrong');
+    validation.profile = true;
+  } else {
+    formProfileInput.classList.add('wrong');
+    validation.profile = false;
+  }
+});
+
+form.querySelectorAll('input').forEach(element => element.addEventListener('change', () => {
+  if (validation.name && validation.address && validation.profile) {
+    formButton.disabled = false;
+  } else {
+    formButton.disabled = true;
+  }
+}));
