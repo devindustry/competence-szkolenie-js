@@ -85,36 +85,42 @@ const person2 = {
 
 const people = [
   new CreatePerson(person1),
-  new CreatePerson(person1),
-  new CreatePerson(person2),
   new CreatePerson(person2),
 ];
 
-const renderHtml = (people) => people.map(element => {
-  const newElement = document.createElement('div');
-  newElement.innerText = element.displayFullInfo();
+const renderHtml = (people) => {
+  studentsDomElement.innerHTML = '';
+  teachersDomElement.innerHTML = '';
 
-  if (element.profile === PROFILE.STUDENT) {
-    return studentsDomElement.appendChild(newElement);
-  }
-  return teachersDomElement.appendChild(newElement);
-});
+  people.map(element => {
+    const newElement = document.createElement('div');
+    newElement.innerText = element.displayFullInfo();
+
+    if (element.profile === PROFILE.STUDENT) {
+
+      return studentsDomElement.appendChild(newElement);
+    }
+    return teachersDomElement.appendChild(newElement);
+  });
+};
 
 renderHtml(people);
 studentsDomElement.classList.add('final');
 teachersDomElement.classList.add('final');
 
 
-const scrollListener = () => {
-  if (window.scrollY > 300) {
-    headerDomElement.classList.add('scroll');
-  } else {
-    headerDomElement.classList.remove('scroll');
+const form = document.forms['peopleForm'];
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const newPerson = {
+    name: form['name'].value,
+    address: form['address'].value,
+    age: form['age'].value,
+    id: form['id'].value,
+    profile: form['profile'].value === 'teacher' ? PROFILE.TEACHER : PROFILE.STUDENT,
   }
-}
-
-window.addEventListener('scroll', scrollListener);
-
-buttonDomElement.addEventListener('click', ()=> {
-  window.removeEventListener('scroll', scrollListener);
+  people.push(new CreatePerson(newPerson));
+  renderHtml(people);
+  // window.location.assign(`${window.location.href.replace('index', 'index2')}?name=${form['name'].value}`);
 });
