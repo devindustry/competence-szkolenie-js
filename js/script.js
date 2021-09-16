@@ -124,6 +124,65 @@ const validation = {
   profile: false,
 };
 
+function validateForm() {
+  if (validation.name && validation.address && validation.profile) {
+    formButton.disabled = false;
+  } else {
+    formButton.disabled = true;
+  }
+}
+
+form.childNodes.forEach(element => {
+  const currentFormLs = JSON.parse(window.localStorage.getItem('peopleForm'));
+  element.value = currentFormLs && currentFormLs[element.name] || '';
+
+  if (element.name === 'name') {
+    if (formNameInput.value.length < 3) {
+      formNameInput.classList.add('wrong');
+      validation.name = false;
+    } else {
+      formNameInput.classList.remove('wrong');
+      validation.name = true;
+    }
+  }
+
+  if (element.name === 'address') {
+    if (formAddressInput.value.length < 3) {
+      formAddressInput.classList.add('wrong');
+      validation.address = false;
+    } else {
+      formAddressInput.classList.remove('wrong');
+      validation.address = true;
+    }
+  }
+
+  if (element.name === 'profile') {
+    if (formProfileInput.value === 'teacher' || formProfileInput.value === 'student' ) {
+      formProfileInput.classList.remove('wrong');
+      validation.profile = true;
+    } else {
+      formProfileInput.classList.add('wrong');
+      validation.profile = false;
+    }
+  }
+
+  validateForm();
+});
+
+form.querySelectorAll('input').forEach(element => element.addEventListener('change', () => {
+  validateForm();
+}));
+
+form.childNodes.forEach(element => {
+  element.addEventListener('change', () => {
+    const currentFormLs = JSON.parse(window.localStorage.getItem('peopleForm'));
+     window.localStorage.setItem('peopleForm', JSON.stringify({
+      ...currentFormLs,
+      [element.name]: element.value,
+    }));
+  })
+})
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -137,6 +196,7 @@ form.addEventListener('submit', (e) => {
     }
     people.push(new CreatePerson(newPerson));
     renderHtml(people);
+    window.localStorage.removeItem('peopleForm');
   }
 });
 
@@ -171,10 +231,3 @@ formProfileInput.addEventListener('input', ()=> {
   }
 });
 
-form.querySelectorAll('input').forEach(element => element.addEventListener('change', () => {
-  if (validation.name && validation.address && validation.profile) {
-    formButton.disabled = false;
-  } else {
-    formButton.disabled = true;
-  }
-}));
