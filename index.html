@@ -16,6 +16,9 @@
                 background: red;
                 transition: all 250ms linear;
             }
+            .wrong {
+                background: red;
+            }
         </style>
     </head>
     <body>
@@ -25,11 +28,11 @@
 
 
     <form name="peopleForm" id="peopleForm">
-        <input type="text" name="name" placeholder="Imie i nazwisko" />
-        <input type="text" name="address" placeholder="Adres" />
-        <input type="text" name="age" placeholder="Wiek" />
-        <input type="text" name="id" placeholder="ID" />
-        <input type="text" name="profile" placeholder="teacher / student" />
+        <input type="text" name="name" placeholder="Imie i nazwisko" class="input" />
+        <input type="text" name="address" placeholder="Adres" class="input"/>
+        <input type="text" name="age" placeholder="Wiek" class="input"/>
+        <input type="text" name="id" placeholder="ID" class="input"/>
+        <input type="text" name="profile" placeholder="teacher / student" class="input"/>
         <button type="submit">Wyślij formularz</button>
     </form>
 

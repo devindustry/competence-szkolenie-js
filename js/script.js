@@ -124,3 +124,27 @@ form.addEventListener('submit', (e) => {
   renderHtml(people);
   // window.location.assign(`${window.location.href.replace('index', 'index2')}?name=${form['name'].value}`);
 });
+
+form['name'].addEventListener('input', ()=> {
+  if (form['name'].value.length < 3) {
+    form['name'].classList.add('wrong');
+  } else {
+    form['name'].classList.remove('wrong');
+  }
+});
+
+form['address'].addEventListener('input', ()=> {
+  if (form['address'].value.length < 3) {
+    form['address'].classList.add('wrong');
+  } else {
+    form['address'].classList.remove('wrong');
+  }
+});
+
+form['profile'].addEventListener('input', ()=> {
+  if (form['profile'].value === 'teacher' || form['profile'].value === 'student' ) {
+    form['profile'].classList.remove('wrong');
+  } else {
+    form['profile'].classList.add('wrong');
+  }
+});
