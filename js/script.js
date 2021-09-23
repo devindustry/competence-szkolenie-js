@@ -5,6 +5,7 @@ const teachersDomElement = document.querySelector('#teachers');
 const loaderElement = document.querySelector('.loader');
 const loadMoreElement = document.querySelector('.loadButton');
 const errorElement = document.querySelector('.error');
+const promiseResult = document.querySelector('.promiseResult');
 
 class Person {
     constructor(name, address, age) {
@@ -264,3 +265,13 @@ const loadData = () => {
 loadData();
 
 loadMoreElement.addEventListener('click', loadData);
+
+const calculate = (value) => {
+    return new Promise(((resolve, reject) => {
+        value > 0 ? resolve(value * value) : reject('Liczba mniejsza od zera');
+    }))
+}
+
+calculate(-10)
+    .then(result => promiseResult.innerHTML = result)
+    .catch(error => promiseResult.innerHTML = error);
