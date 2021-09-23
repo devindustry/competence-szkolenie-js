@@ -3,6 +3,8 @@ const headerDomElement = document.querySelector('.header');
 const buttonDomElement = document.querySelector('.disable');
 const teachersDomElement = document.querySelector('#teachers');
 const loaderElement = document.querySelector('.loader');
+const loadMoreElement = document.querySelector('.loadButton');
+const errorElement = document.querySelector('.error');
 
 class Person {
     constructor(name, address, age) {
@@ -228,10 +230,14 @@ formProfileInput.addEventListener('input', () => {
 
 const loadData = () => {
     loaderElement.classList.add('loader--active');
-
-    fetch("https://jsonplaceholder.typicode.com/users")
+    errorElement.classList.remove('error--active');
+    fetch("https://jsonplaceholder.typicode.com/users2")
         .then(
-            response => response.json())
+            response => {
+                if (response.status > 400)
+                    throw Error;
+                return response.json();
+            })
         .then(responseJSON => {
             setTimeout(() => {
                 responseJSON.map(element => {
@@ -245,8 +251,16 @@ const loadData = () => {
                     renderHtml(people);
                     loaderElement.classList.remove('loader--active');
                 })
-            }, 40000);
+            }, 4000);
+        })
+        .catch(error => {
+            setTimeout(() => {
+                loaderElement.classList.remove('loader--active');
+                errorElement.classList.add('error--active');
+            }, 4000);
         });
 };
 
 loadData();
+
+loadMoreElement.addEventListener('click', loadData);

@@ -25,16 +25,26 @@
             .loader--active {
                 display: block;
             }
+            .error {
+                display: none;
+            }
+            .error--active {
+                display: block;
+            }
         </style>
     </head>
     <body>
     <div class="loader">
         Ładowanie danych...
     </div>
+    <div class="error">
+        Blad pobierania danych
+    </div>
     <div class="students">
     </div>
     <div id="teachers"></div>
 
+    <button class="loadButton">Laduj wiecej osob</button>
 
     <form name="peopleForm" id="peopleForm">
         <input type="text" name="name" placeholder="Imie i nazwisko" class="input" />
