@@ -231,3 +231,18 @@ formProfileInput.addEventListener('input', ()=> {
   }
 });
 
+
+const asyncElement = document.querySelector('.async');
+
+const setText = (text, duration) => {
+  if (duration) {
+    return setTimeout(() => {
+      asyncElement.innerHTML += `<div>${text}</div>`;
+    }, duration);
+  }
+  return asyncElement.innerHTML += `<div>${text}</div>`;
+}
+
+setText('Pierwsza linia');
+setText('Druga linia', 10000);
+setText('Trzecia linia', 20000);
