@@ -1,9 +1,22 @@
-var http = require('http');
+const http = require('http');
+const fs = require('fs');
+const indexHtml = fs.readFileSync('./src/index.html');
+const aboutHtml = fs.readFileSync('./src/about.html');
 
-const add = (a,b) => a+b;
-const result = String(add(10,4));
+const ROUTING = {
+    '/': indexHtml,
+    '/about': aboutHtml,
+};
 
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end(result);
-}).listen(3000);
+const HOSTNAME = '127.0.0.1';
+const PORT = 3000;
+
+const server = http.createServer((request, response) => {
+   response.statusCode = 200;
+   response.setHeader('Content-Type', 'text/html');
+   response.end(ROUTING[request.url]);
+});
+
+server.listen(PORT, HOSTNAME, () => {
+   console.log(`Uruchomiono server NodeJS jako: ${HOSTNAME} na porcie ${PORT}`);
+});
