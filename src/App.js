@@ -3,6 +3,7 @@ import TextSection from "./components/TextSection";
 import Footer from "./components/Footer";
 import Counter from "./components/Counter";
 import PostList from "./components/PostList";
+import Comments from "./components/Comments";
 const TEXTS = {
     HEADER: {
         TITLE: 'Blog napisany w React JS',
@@ -28,6 +29,7 @@ function App() {
         </TextSection>
         <Counter />
         <PostList />
+        <Comments />
         <Footer text={TEXTS.FOOTER.COPY}/>
     </div>
   );
