@@ -5,14 +5,33 @@ const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 class PostList extends Component {
     state = {
         postList: [],
+        loading: false,
+        error: false,
     }
 
     componentDidMount() {
+        this.setState({
+            loading: true,
+            error: false,
+        });
+
         fetch(API_URL)
-            .then(response => response.json())
-            .then(data => this.setState({
+            .then(response => {
+                if (response.status > 400) {
+                    throw new Error();
+                }
+                return response.json();
+            })
+            .then(data => setTimeout(() => this.setState({
                 postList: data,
-            }));
+                loading: false,
+            }), 2000))
+            .catch(err => {
+                this.setState({
+                    loading: false,
+                    error: true,
+                })
+            });
     };
 
     renderPosts = () => this.state.postList.map(({title, body, id}) => (
@@ -24,6 +43,16 @@ class PostList extends Component {
     ));
 
     render() {
+        const { loading, error } = this.state;
+
+        if (loading) {
+            return (<div>Ładowanie...</div>);
+        }
+
+        if (error) {
+            return (<div>Błąd pobierania</div>)
+        }
+
         return (
             <div>
                 <h2>Lista postów:</h2>
