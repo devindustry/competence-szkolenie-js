@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
@@ -25,7 +26,7 @@ class PostList extends Component {
             .then(data => setTimeout(() => this.setState({
                 postList: data,
                 loading: false,
-            }), 2000))
+            }), 200))
             .catch(err => {
                 this.setState({
                     loading: false,
@@ -37,7 +38,7 @@ class PostList extends Component {
     renderPosts = () => this.state.postList.map(({title, body, id}) => (
         <div key={id}>
             <h4>{title}</h4>
-            <p>{body}</p>
+            <Link to={`/post/${id}`}>Czytaj więcej</Link>
             <hr/>
         </div>
     ));

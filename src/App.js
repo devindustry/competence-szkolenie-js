@@ -1,37 +1,33 @@
-import Header from './components/Header';
-import TextSection from "./components/TextSection";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import PostDetails from './pages/PostDetails';
+
+import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Counter from "./components/Counter";
-import PostList from "./components/PostList";
-import Comments from "./components/Comments";
+
 const TEXTS = {
     HEADER: {
         TITLE: 'Blog napisany w React JS',
-    },
-    TEXT_SECTION1: {
-        TEXT: 'Treść strony przykładowa',
-    },
-    TEXT_SECTION2: {
-        TEXT: 'Treść strony przykładowa 2',
-        ADDITIONAL_TEXT: 'Dodatkowa treść strony',
     },
     FOOTER: {
         COPY: 'Copyright'
     }
 }
+
 function App() {
   return (
-    <div>
-        <Header title={TEXTS.HEADER.TITLE} />
-        <TextSection text={TEXTS.TEXT_SECTION1.TEXT}/>
-        <TextSection text={TEXTS.TEXT_SECTION2.TEXT}>
-            {TEXTS.TEXT_SECTION2.ADDITIONAL_TEXT}
-        </TextSection>
-        <Counter />
-        <PostList />
-        <Comments />
-        <Footer text={TEXTS.FOOTER.COPY}/>
-    </div>
+      <>
+          <BrowserRouter>
+              <Header title={TEXTS.HEADER.TITLE} />
+              <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/about" component={About} />
+                  <Route path="/post/:id" component={PostDetails} />
+              </Switch>
+          </BrowserRouter>
+          <Footer text={TEXTS.FOOTER.COPY}/>
+      </>
   );
 }
 
