@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import TextSection from "./components/TextSection";
 import Footer from "./components/Footer";
+import Counter from "./components/Counter";
 
 const TEXTS = {
     HEADER: {
@@ -25,6 +26,7 @@ function App() {
         <TextSection text={TEXTS.TEXT_SECTION2.TEXT}>
             {TEXTS.TEXT_SECTION2.ADDITIONAL_TEXT}
         </TextSection>
+        <Counter />
         <Footer text={TEXTS.FOOTER.COPY}/>
     </div>
   );
