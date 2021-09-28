@@ -1,11 +1,22 @@
 import React from 'react';
 
-const TextSection = () => {
+const TEXTS = {
+    PARAGRAPH: 'Treść strony przykładowa',
+}
+const TextSection = (props) => {
+    const handleClick = (x) => {
+        console.log('kliknięcie w przycisk', x);
+    };
+
     return (
         <div>
             <p>
-                Treść strony przykładowa
+                {TEXTS.PARAGRAPH}
             </p>
+            {props.children && <p>
+                {props.children}
+            </p>}
+            <button className="button" onClick={() => handleClick(4)}>AKCJA</button>
         </div>
     )
 }

@@ -5,11 +5,13 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div>
-        <Header/>
+        <Header title="Nagłówek 1" subtitle="Nagłówe 2"/>
         Testowa aplikacja react JS
         <TextSection />
-        <TextSection />
-        <Footer />
+        <TextSection>
+            Dodatkowa treść strony
+        </TextSection>
+        <Footer text="Copyright"/>
     </div>
   );
 }
