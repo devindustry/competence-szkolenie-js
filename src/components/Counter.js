@@ -7,6 +7,14 @@ class Counter extends Component {
         value: INITIAL_COUNTER,
     }
 
+    componentDidMount() {
+        console.log('MOUNT')
+    }
+
+    componentDidUpdate() {
+        console.log('UPDATE')
+    }
+
     handleIncrementCounter = () => {
         this.setState({
             value: this.state.value + 1,
@@ -33,6 +41,7 @@ class Counter extends Component {
     // };
 
     render() {
+        console.log('RENDER');
         return (
             <div>
                 <p>Counter: {this.state.value}</p>
