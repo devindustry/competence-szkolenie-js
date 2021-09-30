@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import useFetchData from '../hooks/useFetchData';
 import Comments from "../components/Comments";
 const API_URL = 'https://jsonplaceholder.typicode.com/posts/';
 
 const PostDetails = (props) => {
-    const [ postDetails, setPostDetails ] = useState({});
-    const [ loading, setLoading ] = useState(false);
-    const [ error, setError ] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        fetch(`${API_URL}${props.match.params.id}`)
-            .then(response => {
-                if (response.status > 400) {
-                    throw new Error();
-                }
-                return response.json();
-            })
-            .then(data => setTimeout(() => {
-                    setPostDetails(data);
-                    setLoading(false);
-                }, 200)
-            )
-            .catch(e => {
-                setError(true);
-                setLoading(false);
-            });
-    }, []);
+    const { data, loading, error } = useFetchData(`${API_URL}${props.match.params.id}`);
 
     if (loading) {
         return (<div>Ładowanie...</div>);
@@ -37,8 +16,8 @@ const PostDetails = (props) => {
     return (
         <div>
             <h1>Szczegóły postu</h1>
-            <h3>{postDetails.title}</h3>
-            <p>{postDetails.body}</p>
+            <h3>{data.title}</h3>
+            <p>{data.body}</p>
             <Comments />
         </div>
     )
