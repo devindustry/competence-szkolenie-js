@@ -1,56 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 const INITIAL_COUNTER = 0;
 
-class Counter extends Component {
-    state = {
-        value: INITIAL_COUNTER,
-    }
+const Counter = () => {
+    const [counterValue, setCounterValue] = useState(INITIAL_COUNTER);
 
-    componentDidMount() {
-        console.log('MOUNT')
-    }
-
-    componentDidUpdate() {
-        console.log('UPDATE')
-    }
-
-    handleIncrementCounter = () => {
-        this.setState({
-            value: this.state.value + 1,
-        })
+    const handleIncrementCounter = () => {
+        setCounterValue(counterValue + 1);
     };
 
-    handleDecrementCounter = () => {
-        this.setState({
-            value: this.state.value - 1,
-        })
-    }
+    const handleDecrementCounter = () => {
+        setCounterValue(counterValue - 1);
+    };
 
-    handleResetCounter = () => {
-        this.setState({
-            value: INITIAL_COUNTER,
-        })
-    }
+    const handleResetCounter = () => {
+        setCounterValue(INITIAL_COUNTER);
+    };
 
-
-    // handleIncrementCounter = () => {
-    //     this.setState(prevState => ({
-    //         value: prevState.value + 1,
-    //     }))
-    // };
-
-    render() {
-        console.log('RENDER');
-        return (
-            <div>
-                <p>Counter: {this.state.value}</p>
-                <button onClick={this.handleIncrementCounter}>+</button>
-                <button onClick={this.handleDecrementCounter}>-</button>
-                <button onClick={this.handleResetCounter}>RESET</button>
-            </div>
-        )
-    }
+    return (<div>
+        Counter: {counterValue}
+        <button onClick={handleIncrementCounter}>+</button>
+        <button onClick={handleDecrementCounter}>-</button>
+        <button onClick={handleResetCounter}>RESET</button>
+    </div>)
 }
-
 export default Counter;
